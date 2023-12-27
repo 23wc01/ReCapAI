@@ -5,7 +5,8 @@ import os
 import gradio
 import shutil
 
-openai.api_key = input("Enter OpenAI API key: ")
+#In cmd, set up API key with: setx "myAPIKey"
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Transcribe audio into text
 def transcribe(audio_file_path):
