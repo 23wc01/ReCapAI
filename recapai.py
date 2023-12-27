@@ -8,26 +8,26 @@ import shutil
 openai.api_key = input("Enter OpenAI API key: ")
 
 # Transcribe audio into text
-def transcribe_audio(audio_file_path):
+def transcribe(audio_file_path):
     with open(audio_file_path, 'rb') as audio_file:
         transcription = openai.Audio.transcribe('whisper-1', audio_file)
     return transcription['text']
 
 # Returns a dictionary of the summaries
 def recap(transcription):
-    abstract_summary = abstract_summary_extraction(transcription)
-    sentiment = sentiment_analysis(transcription)
-    key_points = key_points_extraction(transcription)
-    action_items = action_items_extraction(transcription)
+    summary = summarizer(transcription)
+    sentiment = sentiment_analyzer(transcription)
+    key_points = key_points_extracter(transcription)
+    action_items = tasks_extracter(transcription)
     return {
         "sentiment": sentiment,
-        "abstract_summary": abstract_summary,
+        "summary": summary,
         "key_points": key_points,
         "action_items": action_items
     }
     
 #Analyze tone & emotion
-def sentiment_analysis(transcription):
+def sentiment_analyzer(transcription):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -38,7 +38,7 @@ def sentiment_analysis(transcription):
     return completion['choices'][0]['message']['content']
 
 # Summarize into 1 abstract paragraph
-def abstract_summary_extraction(transcription):
+def summarizer(transcription):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -49,7 +49,7 @@ def abstract_summary_extraction(transcription):
     return completion['choices'][0]['message']['content']
 
 # List key points
-def key_points_extraction(transcription):
+def key_points_extracter(transcription):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -60,7 +60,7 @@ def key_points_extraction(transcription):
     return completion['choices'][0]['message']['content']
 
 # List action items (assignments, tasks, actions, etc.)
-def action_items_extraction(transcription):
+def tasks_extracter(transcription):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -104,8 +104,8 @@ audio_file_path_part2 = audio_file_path + "Part2" + audio_file_name
 part1.export(audio_file_path_part1)
 part2.export(audio_file_path_part2)
 
-transcription1 = transcribe_audio(audio_file_path_part1)
-transcription2 = transcribe_audio(audio_file_path_part2)
+transcription1 = transcribe(audio_file_path_part1)
+transcription2 = transcribe(audio_file_path_part2)
 transcription = transcription1 + transcription2
 recap_summary = recap(transcription)
 
@@ -115,7 +115,7 @@ save_as_docx(recap_summary, "./reacpai.docx")
 def process_file(audio_filepath):
     path = "./" + os.path.basename(audio_filepath)  
     shutil.copyfile(audio_filepath.name, path)
-    return getRecap(path)
+    return recap(path)
 
 getAudioFile = gradio.File(file_count="single", file_types=["audio"])
 UI = gradio.Interface(process_file, getAudioFile, "file")
