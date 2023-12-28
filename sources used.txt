@@ -1,7 +1,7 @@
 
 For AI: https://platform.openai.com/docs/tutorials/meeting-minutes
 
-For audio: https://platform.openai.com/docs/guides/speech-to-text/longer-inputs
+For audio: https://www.assemblyai.com/docs/guides/transcribing-an-audio-file
 
 For UI: https://www.youtube.com/watch?v=pGOyw_M1mNE
 
