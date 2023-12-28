@@ -3,7 +3,7 @@ import requests
 import json
 from time import sleep
 
-def aai_transcribe(file_address: str, aai_key: str):
+def aai_transcribe(aai_key: str, file_address: str):
     """Transcribe audio file in file_address returns transcript text (str)
     Uses polling technique (as recommended) to check AssemblyAI's transcribing job status every 3 secs.
         
@@ -64,13 +64,10 @@ def poll_routinely(api_key: str, polling_endpoint: str):
         transcript_json = requests.get(polling_endpoint, headers=api_key).json()
         # When status == completed, print text & break
         if transcript_json['status'] == 'completed':
-            print(transcript_json['text'])
             return transcript_json['text']
-            print("test")
             break
         # When status == error, print error info
         elif transcript_json['status'] == 'error':
-            
             raise RuntimeError(f"Transcription failed: {transcript_json['error']}")
         else:
             sleep(3)

@@ -1,20 +1,14 @@
 import openai
 from openai import OpenAI
 from docx import Document
-import assemblyai as aai
+from transcribe import aai_transcribe
 import os
 import gradio
 import shutil
 
 #In cmd, set up each API key with command: setx "myAPIKey"
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-aai.settings.api_key = os.getenv('ASSEMBLYAI_KEY')
-
-# Transcribe audio into text
-def transcribe(audio_file_path):
-    transcriber = aai.Transcriber()
-    transcript = transcriber.transcribe(audio_file_path)
-    return transcript
+ASSEMBLYAI_KEY = os.getenv('ASSEMBLYAI_KEY')
 
 # Returns a dictionary of the summaries
 def recap(transcript):
@@ -23,10 +17,10 @@ def recap(transcript):
     key_points = key_points_extracter(transcript)
     tasks = tasks_extracter(transcript)
     return {
-        "sentiment": sentiment,
-        "summary": summary,
-        "key_points": key_points,
-        "tasks": tasks
+        "SENTIMENT": sentiment,
+        "SUMMARY": summary,
+        "KEY POINTS": key_points,
+        "TASKS": tasks
     }
     
 # Analyze tone & emotion
@@ -93,9 +87,10 @@ def printRecap(recap):
 #Run functions
 audio_file_path = "./"
 audio_file_name = "EarningsCall.wav"
-transcript = transcribe(audio_file_path+audio_file_name)
 
-recapped_info = recap(transcript.text)
+transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file_path+audio_file_name)
+
+recapped_info = recap(transcript)
 
 printRecap(recapped_info)
 save_as_docx(recapped_info, "./reacpai.docx")
