@@ -4,7 +4,6 @@ from transcribe import aai_transcribe
 import output
 import os
 import gradio
-import shutil
 
 #In cmd, set up each API key with command: setx "myAPIKey"
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
@@ -78,14 +77,12 @@ transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file_path+audio_file_name)
 recapped_info = recap(transcript)
 
 output.print_recap(recapped_info)
-output.save_as_docx(recapped_info, "./reacpai.docx")
+output.save_as_txt(recapped_info)
+output.save_as_docx(recapped_info)
+output.save_as_pdf(recapped_info)
 
-"""def process_file(audio_filepath):
-    path = "./" + os.path.basename(audio_filepath)  
-    shutil.copyfile(audio_filepath.name, path)
-    return recap(path)
 
-getAudioFile = gradio.File(file_count="single", file_types=["audio"])
+"""getAudioFile = gradio.File(file_count="single", file_types=["audio"])
 UI = gradio.Interface(process_file, getAudioFile, "file")
 UI.launch()"""
 
