@@ -1,7 +1,7 @@
 import openai
 from openai import OpenAI
-from docx import Document
 from transcribe import aai_transcribe
+import output
 import os
 import gradio
 import shutil
@@ -67,21 +67,6 @@ def tasks_extracter(transcript):
     )
     return completion.choices[0].message.content
 
-# Save summaries into a .docx document
-def save_as_docx(recap, filename):
-    doc = Document()
-    for key, value in recap.items():
-        #Replace all underscores in key, replace with spaces and capitalize word
-        heading = ' '.join(word.capitalize() for word in key.split('_'))
-        doc.add_heading(heading, level=1)
-        doc.add_paragraph(value)
-        doc.add_paragraph()
-    doc.save(filename)
-
-def printRecap(recap):
-    for key, value in recap.items():
-        print("\n" + key)
-        print(value)
     
 
 #Run functions
@@ -92,8 +77,8 @@ transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file_path+audio_file_name)
 
 recapped_info = recap(transcript)
 
-printRecap(recapped_info)
-save_as_docx(recapped_info, "./reacpai.docx")
+output.print_recap(recapped_info)
+output.save_as_docx(recapped_info, "./reacpai.docx")
 
 """def process_file(audio_filepath):
     path = "./" + os.path.basename(audio_filepath)  

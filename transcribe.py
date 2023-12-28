@@ -7,11 +7,11 @@ def aai_transcribe(aai_key: str, file_address: str):
     """Transcribe audio file in file_address returns transcript text (str)
     Uses polling technique (as recommended) to check AssemblyAI's transcribing job status every 3 secs.
         
-    Keyword arguments:
+    Parameters:
     file_address -- str, Audio file path
     aai_key -- str, AssemblyAI API key
 
-    Return:
+    Returns:
     transcript_text -- str, transcription of audio file
 
     """
