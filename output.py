@@ -19,6 +19,9 @@ def save_as_txt(recap, file_path="./", file_name="recapai"):
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
         file_path -- str, Path to save txt to (default=./)
         file_name -- str, name of txt (default=recapai)
+
+        Returns:
+        file_address -- str, file's full path with path, name, and extension 
     """
     file_address = file_path + file_name + ".txt"
     with open(file_address, "w") as file:
@@ -27,6 +30,7 @@ def save_as_txt(recap, file_path="./", file_name="recapai"):
             file.write("\n" + key)
             file.write("\n" + value)
     print(f"Saving {file_name}.txt at {file_path}")
+    return file_address
 
 def save_as_docx(recap, file_path="./", file_name="recapai"):
     """Save formatted recap with headings & newlines as Microsoft Word docx
@@ -34,6 +38,9 @@ def save_as_docx(recap, file_path="./", file_name="recapai"):
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
         file_path -- str, Path to save txt to (default=./)
         file_name -- str, name of txt (default=recapai)
+
+        Returns:
+        file_address -- str, file's full path with path, name, and extension 
     """
     file_address = file_path + file_name + ".docx"
     doc = Document()
@@ -45,6 +52,7 @@ def save_as_docx(recap, file_path="./", file_name="recapai"):
         doc.add_paragraph()
     doc.save(file_address)
     print(f"Saving {file_name}.docx at {file_path}")
+    return file_address
 
 def save_as_pdf(recap, file_path="./", file_name="recapai"):
     """Save formatted recap with headings & newlines as pdf
@@ -52,6 +60,9 @@ def save_as_pdf(recap, file_path="./", file_name="recapai"):
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
         file_path -- str, Path to save txt to (default=./)
         file_name -- str, name of txt (default=recapai)
+
+        Returns:
+        file_address -- str, file's full path with path, name, and extension 
     """
     file_address = file_path + file_name + ".pdf"
     pdf = FPDF()
@@ -69,3 +80,4 @@ def save_as_pdf(recap, file_path="./", file_name="recapai"):
         pdf.write(5, "\n\n")
     pdf.output(file_address)
     print(f"Saving {file_name}.pdf to {file_path}")
+    return file_address
