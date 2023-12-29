@@ -1,20 +1,17 @@
+# Libraries for accessing OpenAI API
 import openai
 from openai import OpenAI
-from transcribe import aai_transcribe
-import output
 import os
-import gradio
 
-#In cmd, set up each API key with command: setx "myAPIKey"
+# In cmd, quick setup of API key by entering: setx KEY_NAME "my_key"
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-ASSEMBLYAI_KEY = os.getenv('ASSEMBLYAI_KEY')
 
 # Returns a dictionary of the summaries
 def recap(transcript):
-    summary = summarizer(transcript)
-    sentiment = sentiment_analyzer(transcript)
-    key_points = key_points_extracter(transcript)
-    tasks = tasks_extracter(transcript)
+    summary = summarizer(transcript, client)
+    sentiment = sentiment_analyzer(transcript, client)
+    key_points = key_points_extracter(transcript, client)
+    tasks = tasks_extracter(transcript, client)
     return {
         "SENTIMENT": sentiment,
         "SUMMARY": summary,
@@ -23,7 +20,7 @@ def recap(transcript):
     }
     
 # Analyze tone & emotion
-def sentiment_analyzer(transcript):
+def sentiment_analyzer(transcript, client):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -34,7 +31,7 @@ def sentiment_analyzer(transcript):
     return completion.choices[0].message.content
 
 # Summarize into 1 abstract paragraph
-def summarizer(transcript):
+def summarizer(transcript, client):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -45,7 +42,7 @@ def summarizer(transcript):
     return completion.choices[0].message.content
 
 # List key points
-def key_points_extracter(transcript):
+def key_points_extracter(transcript, client):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -56,7 +53,7 @@ def key_points_extracter(transcript):
     return completion.choices[0].message.content
 
 # List action items (assignments, tasks, actions, etc.)
-def tasks_extracter(transcript):
+def tasks_extracter(transcript, client):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages = [
@@ -66,25 +63,6 @@ def tasks_extracter(transcript):
     )
     return completion.choices[0].message.content
 
-    
-
-#Run functions
-audio_file_path = "./"
-audio_file_name = "EarningsCall.wav"
-
-transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file_path+audio_file_name)
-
-recapped_info = recap(transcript)
-
-output.print_recap(recapped_info)
-output.save_as_txt(recapped_info)
-output.save_as_docx(recapped_info)
-output.save_as_pdf(recapped_info)
-
-
-"""getAudioFile = gradio.File(file_count="single", file_types=["audio"])
-UI = gradio.Interface(process_file, getAudioFile, "file")
-UI.launch()"""
 
     
 

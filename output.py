@@ -21,7 +21,6 @@ def save_as_txt(recap, file_path="./", file_name="recapai"):
         file_name -- str, name of txt (default=recapai)
     """
     file_address = file_path + file_name + ".txt"
-    doc = Document()
     with open(file_address, "w") as file:
         for key, value in recap.items():
             # Write key names as headers & values as content after header
@@ -58,15 +57,15 @@ def save_as_pdf(recap, file_path="./", file_name="recapai"):
     pdf = FPDF()
     pdf.add_page()
     for key, value in recap.items():
-        # Write headers
-          pdf.set_font("Helvetica", style="B", size=32)
-          pdf.set_text_color(100, 149, 237) # cornflower blue
-          pdf.write(16, f"{key}\n")
-          # Write content below headers
-          pdf.set_font("Helvetica",size=12)
-          pdf.set_text_color(0, 0, 0) # black
-          formatted_value = u'%s' % value
-          pdf.write(5, formatted_value)
-          pdf.write(5, "\n\n")
+        # Write key names as large cornflower blue headers in pdfs
+        pdf.set_font("Helvetica", style="B", size=32)
+        pdf.set_text_color(100, 149, 237) # cornflower blue
+        pdf.write(16, f"{key}\n")
+        # Write values (completions) as paragraph text in pdf
+        pdf.set_font("Helvetica",size=12)
+        pdf.set_text_color(0, 0, 0) # black
+        formatted_value = u'%s' % value
+        pdf.write(5, formatted_value)
+        pdf.write(5, "\n\n")
     pdf.output(file_address)
-    print(f"Saving {file_name}.pdf to {file_path}.")
+    print(f"Saving {file_name}.pdf to {file_path}")
