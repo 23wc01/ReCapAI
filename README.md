@@ -5,12 +5,15 @@ Freshman year's 1st ChatGPT API project &amp; 1st hackathon project. Utilized GP
 Run .ipynb file and EarningCalls.wav's full "recap" should be created in your local folder as a file name "recap.docx". 
 
 # Project Progress
-Due to the short 2-day time limit at [TigerHacks2023](https://mizzoutigerhacks2023.devpost.com/), the program could only create a recap for 1 specific audio file. Although that was enough to achieve 1st place in my category, there are definitely more improvements to be made. *OpenAI has since updated its API, thus, I will also make code changes accordingly
+v1.0.0: Due to the short 2-day time limit at [TigerHacks2023](https://mizzoutigerhacks2023.devpost.com/), the program could only create a recap for 1 specific audio file. Although that was enough to achieve 1st place in my category, there are definitely more improvements to be made. *OpenAI has since updated its API, thus, I will also make code changes accordingly
+
+v2.0.0 update: Can now upload any audio files and they can be of longer lengths! Can also choose whether the recap should be in pdf, docx, and/or txt format(s).
 
 # Maintainence
 This independent project will continue to be updated upon by me. I plan to improve the project so that audio files of any length can be "recapped".
+v2.0.0 update: Can now upload any audio files and they can be of longer lengths! Can also choose whether the recap should be in pdf, docx, and/or txt format(s).
 
 # Source
 This project is mainly derived from ChatGPT API's tutorial: https://platform.openai.com/docs/tutorials/meeting-minutes
 
-Additional sources used are listed in .ipynb file.
+Additional sources used are listed in 'sources used.txt' file.
