@@ -18,7 +18,7 @@ def UI_recapai(audio_file="./upload_audio/EarningsCall.wav", output_types=["pdf"
         recap_file_path -- str, Specifies path ONLY of outputted recap file (default = ./output_recap/)
         recap_file_name -- str, Specifies name of outputted recap file (default = EarningsCallRecap)
     Output:
-        outputs -- list[str], file addresses of saved files (for gradio to display on UI)
+        outputs -- list[str], file addresses to outputted recap files (for gradio to display on UI)
     """
     # Transcribe audio
     transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file.name)
