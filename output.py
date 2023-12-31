@@ -13,11 +13,11 @@ def print_recap(recap):
         # Print key names as headers & values as content after header
         print("\n" + key)
         print(value)
-def save_as_txt(recap, file_path="./", file_name="recapai"):
+def save_as_txt(recap, file_path="./output_recap", file_name="recapai"):
     """Save formatted recap with headers & newlines as simple text document(.txt)
         Parameters:
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
-        file_path -- str, Path to save txt to (default=./)
+        file_path -- str, Path to save txt to (default=./output_recap)
         file_name -- str, name of txt (default=recapai)
 
         Returns:
@@ -32,11 +32,11 @@ def save_as_txt(recap, file_path="./", file_name="recapai"):
     print(f"Saving {file_name}.txt at {file_path}")
     return file_address
 
-def save_as_docx(recap, file_path="./", file_name="recapai"):
+def save_as_docx(recap, file_path="./output_recap", file_name="recapai"):
     """Save formatted recap with headings & newlines as Microsoft Word docx
         Parameters:
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
-        file_path -- str, Path to save txt to (default=./)
+        file_path -- str, Path to save txt to (default=./output_recap)
         file_name -- str, name of txt (default=recapai)
 
         Returns:
@@ -54,11 +54,11 @@ def save_as_docx(recap, file_path="./", file_name="recapai"):
     print(f"Saving {file_name}.docx at {file_path}")
     return file_address
 
-def save_as_pdf(recap, file_path="./", file_name="recapai"):
+def save_as_pdf(recap, file_path="./output_recap", file_name="recapai"):
     """Save formatted recap with headings & newlines as pdf
         Parameters:
         recap -- dict, Contains summary, key points, tasks, sentiment as keys and their respective content as values
-        file_path -- str, Path to save txt to (default=./)
+        file_path -- str, Path to save txt to (default=./output_recap)
         file_name -- str, name of txt (default=recapai)
 
         Returns:
