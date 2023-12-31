@@ -10,8 +10,18 @@ from transcribe import aai_transcribe
 ASSEMBLYAI_KEY = os.getenv('ASSEMBLYAI_KEY')
 
 def terminal_recapai(audio_file="./upload_audio/EarningsCall.wav", output_types=["pdf","docx","txt"], recap_file_path="./output_recap/", recap_file_name="EarningsCallRecap"):
+    """Runs recapai program! Can be seperated into 3 main steps: transcribe audio, AI recap transcript, completion (recap) to desired file type(s)
+        Parmeter: 
+        audio_file -- Specifies path to file (default= ./upload_audio/EarningsCall.wav) 
+        output_types -- Specifies which type(s) of file recap should be saved as. Can save as multiple file types. (default = pdf, docx, AND txt)
+        recap_file_path -- Specifies path ONLY of outputted recap file (default = ./output_recap/)
+        recap_file_name -- Specifies name of outputted recap file (default = EarningsCallRecap)
+    """
+    # Transcribe Audio
     transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file)
+    # AI recap transcript
     recap_info = recapai.recap(transcript)
+    # Save recap to desired file type(s)
     for output_type in output_types:
         if output_type == "pdf":
           save_as_pdf(recap_info, recap_file_path, recap_file_name)
@@ -20,6 +30,7 @@ def terminal_recapai(audio_file="./upload_audio/EarningsCall.wav", output_types=
         elif output_type == "txt":
           save_as_txt(recap_info, recap_file_path, recap_file_name)
 def prompt():
+    """Prompts for necessary user inputs in the terminal before passing them to recapai function"""
     run_default = input("Run default demonstration? (y/n) ")
     if run_default == "y":
         print("Demo: Recaps the EarningsCall.wav in 'upload_audio' folder & saves the resulting EarningsCallRecap file in 'output_recap' folder.")
