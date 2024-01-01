@@ -17,7 +17,6 @@ def terminal_recapai(audio_file="./upload_audio/EarningsCall.wav", output_types=
         recap_file_name -- Specifies name of outputted recap file (default = EarningsCallRecap)
     """
     # Transcribe Audio
->>>>>>> refs/remotes/origin/main
     transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file)
     # AI recap transcript
     recap_info = recapai.recap(transcript)
