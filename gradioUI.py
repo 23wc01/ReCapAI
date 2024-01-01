@@ -10,7 +10,11 @@ from transcribe import aai_transcribe
 # In cmd, quick setup of API key by entering: setx KEY_NAME "my_key"
 ASSEMBLYAI_KEY = os.getenv('ASSEMBLYAI_KEY')
 
+<<<<<<< HEAD
 def UI_recapai(audio_file, output_types, file_name="recapai"):
+=======
+def UI_recapai(audio_file="./upload_audio/EarningsCall.wav", output_types=["pdf", "docx", "txt"], file_name="recapai"):
+>>>>>>> refs/remotes/origin/main
     """Runs recapai program on gradio online & sharable interface! Can be seperated into 3 main steps: Transcribe audio, AI recap transcript, save completion (recap) to desired file type(s)
         Parmeter: 
         audio_file -- str, Specifies path to file (default= ./upload_audio/EarningsCall.wav) 
@@ -18,12 +22,20 @@ def UI_recapai(audio_file, output_types, file_name="recapai"):
         recap_file_path -- str, Specifies path ONLY of outputted recap file (default = ./output_recap/)
         recap_file_name -- str, Specifies name of outputted recap file (default = EarningsCallRecap)
     Output:
+<<<<<<< HEAD
         outputs -- list[str], file addresses of saved files (for gradio to display on UI)
     """
     print(audio_file.name)
+=======
+        outputs -- list[str], file addresses to outputted recap files (for gradio to display on UI)
+    """
+    # Transcribe audio
+>>>>>>> refs/remotes/origin/main
     transcript = aai_transcribe(ASSEMBLYAI_KEY, audio_file.name)
     os.remove(audio_file.name) # Remove audio file after transcription
+    # AI recap the transcript
     recap_info = recapai.recap(transcript)
+    # Save completion (recap) to desired file type(s), add file names to outputs so gradio can recieve them
     outputs = []
     for output_type in output_types:
         if output_type == "pdf":
