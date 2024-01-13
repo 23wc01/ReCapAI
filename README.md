@@ -10,8 +10,7 @@ v1.0.0: Due to the short 2-day time limit at [TigerHacks2023](https://mizzoutige
 v2.0.0 update: Can now upload any audio files and they can be of longer lengths! Can also choose whether the recap should be in pdf, docx, and/or txt format(s).
 
 # Maintainence
-This independent project will continue to be updated upon by me. I plan to improve the project so that audio files of any length can be "recapped".
-v2.0.0 update: Can now upload any audio files and they can be of longer lengths! Can also choose whether the recap should be in pdf, docx, and/or txt format(s).
+Done: This independent project will continue to be updated upon by me. I plan to improve the project so that audio files of any length can be "recapped".
 
 # Source
 This project is mainly derived from ChatGPT API's tutorial: https://platform.openai.com/docs/tutorials/meeting-minutes
