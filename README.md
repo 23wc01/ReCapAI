@@ -1,5 +1,6 @@
 # ReCapAI
 Freshman year's 1st ChatGPT API project &amp; 1st hackathon project. Utilized GPT3.5 LLM to perform summarizing (recapping), sentiment analysis, keypoints extraction, action items extraction of an audio file and save AI responses into a word docx.
+[![image](https://github.com/user-attachments/assets/86fdb327-cf8c-4e2e-bb42-5930adaf563e)](https://youtu.be/vne3Hvarrh8)
 
 # Run
 Run .ipynb file and EarningCalls.wav's full "recap" should be created in your local folder as a file name "recap.docx". 
